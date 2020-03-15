@@ -444,10 +444,11 @@ module.exports = (window => {
         }
 
         onTransitionEnd(modalZuckContainer, () => {
-          if (modalZuckContainer.classList.contains('closed')) {
+          if (modalZuckContainer.classList.contains('closed') || modalZuckContainer.classList.contains('closed-up')) {
             modalContent.innerHTML = '';
             modalZuckContainer.style.display = 'none';
             modalZuckContainer.classList.remove('closed');
+            modalZuckContainer.classList.remove('closed-up');
             modalZuckContainer.classList.remove('animated');
           }
         });
@@ -800,7 +801,7 @@ module.exports = (window => {
                 }
               } else {
                   if (isActionToClose) {
-                      modal.close()
+                      modal.close(delta.y < 0);
                   } else {
                       translateY(modalSlider, position.y, 300);
                   }
@@ -975,7 +976,7 @@ module.exports = (window => {
             callback
           );
         },
-        close () {
+        close (isDirectionUp = false) {
           const modalContainer = query('#zuck-modal');
 
           const callback = function () {
@@ -986,7 +987,8 @@ module.exports = (window => {
             fullScreen(modalContainer, true);
 
             if (option('openEffect')) {
-              modalContainer.classList.add('closed');
+              const classNameToClose = isDirectionUp ? 'closed-up' : 'closed';
+              modalContainer.classList.add(classNameToClose);
             } else {
               modalContent.innerHTML = '';
               modalContainer.style.display = 'none';

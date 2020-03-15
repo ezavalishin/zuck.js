@@ -59,6 +59,9 @@
 #zuck-modal.with-effects.closed {
   transform: translateY(100%);
 }
+#zuck-modal.with-effects.closed-up {
+    transform: translateY(-100%);
+}
 
 #zuck-modal .slider {
   width: 300vw;

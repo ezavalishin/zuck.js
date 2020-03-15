@@ -799,7 +799,7 @@ module.exports = (window => {
                   translate(modalSlider, position.x, 300);
                 }
               } else {
-                  if (isActionToClose && !isOutOfBounds) {
+                  if (isActionToClose) {
                       modal.close()
                   } else {
                       translateY(modalSlider, position.y, 300);
